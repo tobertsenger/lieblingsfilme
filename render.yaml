@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: lieblingsfilme-backend
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: lieblingsfilme-db
+          property: connectionString
+    autoDeploy: true
+
+databases:
+  - name: lieblingsfilme-db
+    plan: free
