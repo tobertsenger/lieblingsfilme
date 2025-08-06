@@ -2,7 +2,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config(); // Loads environment variables from .env file
+
+// In production, environment variables are provided by the hosting platform
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config(); // Only load .env in development
+}
 
 // Initialize the Express app
 const app = express();
@@ -32,6 +36,14 @@ app.get('/', (req, res) => {
 // Get the connection string from the environment variables
 const uri = process.env.MONGO_URI;
 
+console.log('Attempting to connect to MongoDB...');
+console.log('MONGO_URI exists:', !!uri);
+
+if (!uri) {
+  console.error('MONGO_URI environment variable is not set!');
+  process.exit(1);
+}
+
 // Connect to MongoDB using Mongoose
 mongoose.connect(uri, {
   serverSelectionTimeoutMS: 30000, // Keep trying to send operations for 30 seconds
@@ -47,4 +59,5 @@ mongoose.connect(uri, {
   })
   .catch(err => {
     console.error('MongoDB connection error:', err);
+    process.exit(1);
   });
