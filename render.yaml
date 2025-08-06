@@ -9,11 +9,5 @@ services:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
-        fromDatabase:
-          name: lieblingsfilme-db
-          property: connectionString
+        value: mongodb+srv://tobertsenger:AyskuJXQz0ccJBsR@cluster0.ftzuofq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     autoDeploy: true
-
-databases:
-  - name: lieblingsfilme-db
-    plan: free
