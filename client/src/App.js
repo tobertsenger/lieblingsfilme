@@ -5,7 +5,7 @@ import AddMovieForm from './components/AddMovieForm';
 import './App.css';
 
 // The base URL for our backend API
-const API_URL = 'http://localhost:5001/api/movies';
+const API_URL = 'https://lieblingsfilme.onrender.com/api/movies';
 
 function App() {
   // State to hold the array of movies
