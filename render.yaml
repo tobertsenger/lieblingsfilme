@@ -9,6 +9,6 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: MONGODB_URI
+      - key: MONGO_URI
         value: mongodb+srv://tobertsenger:AyskuJXQz0ccJBsR@cluster0.ftzuofq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     autoDeploy: true
