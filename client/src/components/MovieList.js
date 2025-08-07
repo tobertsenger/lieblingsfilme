@@ -1,17 +1,17 @@
 import React from 'react';
 import MovieItem from './MovieItem';
 
-// This component displays the list of movies.
-// It receives the 'movies' array and the 'deleteMovie' function from App.js.
+// Diese Komponente zeigt die Liste der Filme an.
+// Sie erhält das 'movies'-Array und die 'deleteMovie'-Funktion von App.js.
 function MovieList({ movies, deleteMovie }) {
   return (
     <div className="movie-list">
-      {/* If there are no movies, display a message. Otherwise, render the list. */}
+      {/* Wenn keine Filme vorhanden sind, zeige eine Nachricht an. Andernfalls die Liste rendern. */}
       {movies.length === 0 ? (
-        <p>No movies yet. Add one!</p>
+        <p>Noch keine Filme. Füge einen hinzu!</p>
       ) : (
         movies.map((movie) => (
-          // For each movie in the array, render a MovieItem component
+          // Für jeden Film im Array wird eine MovieItem-Komponente gerendert
           <MovieItem key={movie._id} movie={movie} deleteMovie={deleteMovie} />
         ))
       )}

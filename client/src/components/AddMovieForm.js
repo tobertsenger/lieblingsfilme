@@ -1,47 +1,47 @@
-    import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-// This component renders a form to add a new movie.
-// It receives the 'addMovie' function from its parent (App.js) via props.
+// Dieses Komponente rendert ein Formular, um einen neuen Film hinzuzufügen.
+// Die Funktion 'addMovie' wird als Prop vom Elternteil (App.js) übergeben.
 function AddMovieForm({ addMovie }) {
-  // State for the title input field
+  // State für das Eingabefeld Titel
   const [title, setTitle] = useState('');
-  // State for the year input field
+  // State für das Eingabefeld Jahr
   const [year, setYear] = useState('');
 
-  // Handles form submission
+  // Behandelt das Absenden des Formulars
   const handleSubmit = (e) => {
-    // Prevents the default form submission behavior (which reloads the page)
+    // Verhindert das Standardverhalten des Formulars (Seiten-Reload)
     e.preventDefault();
-    // Basic validation: if either field is empty, do nothing.
+    // Einfache Validierung: Wenn ein Feld leer ist, tue nichts.
     if (!title || !year) return;
 
-    // Call the addMovie function passed down from App.js
+    // Die addMovie-Funktion aufrufen, die von App.js übergeben wurde
     addMovie({ title, year: Number(year) });
 
-    // Clear the input fields after submission
+    // Die Eingabefelder nach dem Absenden leeren
     setTitle('');
     setYear('');
   };
 
-  // Render the form
+  // Das Formular rendern
   return (
     <form onSubmit={handleSubmit} className="add-movie-form">
-      <h2>Add a New Favorite Movie</h2>
+      <h2>Neuen Lieblingsfilm hinzufügen</h2>
       <input
         type="text"
-        placeholder="Movie Title"
+        placeholder="Filmtitel"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
       />
       <input
         type="number"
-        placeholder="Year"
+        placeholder="Jahr"
         value={year}
         onChange={(e) => setYear(e.target.value)}
         required
       />
-      <button type="submit">Add Movie</button>
+      <button type="submit">Film hinzufügen</button>
     </form>
   );
 }
