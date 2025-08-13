@@ -44,6 +44,45 @@ router.route('/add').post(async (req, res) => {
   }
 });
 
+// Endpoint: PUT /api/movies/:id
+// Description: Handles HTTP PUT requests to update an existing movie by its ID.
+router.route('/:id').put(async (req, res) => {
+  try {
+    // Build an update object only with fields that were supplied
+    const updateData = {};
+    if (Object.prototype.hasOwnProperty.call(req.body, 'title')) {
+      updateData.title = req.body.title;
+    }
+    if (Object.prototype.hasOwnProperty.call(req.body, 'year')) {
+      // convert to number when provided
+      updateData.year = Number(req.body.year);
+    }
+
+    // If nothing to update, return 400
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json('Error: No valid fields provided to update.');
+    }
+
+    // Find the movie by its ID and update it with new data
+    const updatedMovie = await Movie.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true, runValidators: true } // Return the updated document and run schema validations
+    );
+
+    if (!updatedMovie) {
+      // If no movie was found with that ID, return a 404 error
+      return res.status(404).json('Error: Movie not found.');
+    }
+
+    // Respond with the updated movie object
+    res.json(updatedMovie);
+  } catch (err) {
+    // If an error occurs (e.g., invalid ID format or validation error), respond with a 400 status
+    res.status(400).json('Error: ' + err);
+  }
+});
+
 // Endpoint: DELETE /api/movies/:id
 // Description: Handles HTTP DELETE requests to remove a movie by its ID.
 router.route('/:id').delete(async (req, res) => {

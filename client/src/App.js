@@ -41,6 +41,22 @@ function App() {
     }
   };
 
+<<<<<<< HEAD
+=======
+  // Funktion, um einen Film anhand seiner ID zu aktualisieren
+  const updateMovie = async (id, updatedMovie) => {
+    try {
+      const response = await axios.put(`${API_URL}/${id}`, updatedMovie);
+      // Den aktualisierten Film im lokalen State ersetzen
+      setMovies(movies.map((movie) => 
+        movie._id === id ? response.data : movie
+      ));
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren des Films:', error);
+    }
+  };
+
+>>>>>>> d643cd4 (Add update (PUT) functionality to movies API)
   // Funktion, um einen Film anhand seiner ID zu löschen
   const deleteMovie = async (id) => {
     try {
@@ -65,7 +81,11 @@ function App() {
             <AddMovieForm addMovie={addMovie} />
           </section>
           <section className="movie-list-section">
+<<<<<<< HEAD
             <MovieList movies={movies} deleteMovie={deleteMovie} />
+=======
+            <MovieList movies={movies} deleteMovie={deleteMovie} updateMovie={updateMovie} />
+>>>>>>> d643cd4 (Add update (PUT) functionality to movies API)
           </section>
         </div>
       </main>
