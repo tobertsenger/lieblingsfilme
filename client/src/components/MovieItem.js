@@ -30,39 +30,54 @@ function MovieItem({ movie, deleteMovie, updateMovie }) {
     setIsEditing(false);
   };
 
+  // Generate a random movie poster image from Unsplash
+  const posterImage = `https://source.unsplash.com/300x450/?movie,cinema,poster&sig=${movie._id}`;
+
   return (
     <div className="movie-item">
       {isEditing ? (
         // Bearbeitungsmodus: Eingabefelder anzeigen
-        <>
+        <div className="edit-mode">
           <input
             type="text"
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
             className="edit-input"
+            placeholder="Film Titel"
           />
           <input
             type="number"
             value={editYear}
             onChange={(e) => setEditYear(e.target.value)}
             className="edit-input"
+            placeholder="Jahr"
           />
           <div className="edit-buttons">
             <button onClick={handleSave} className="save-btn">Speichern</button>
             <button onClick={handleCancel} className="cancel-btn">Abbrechen</button>
           </div>
-        </>
+        </div>
       ) : (
         // Anzeigemodus: Film-Details anzeigen
-        <>
-          <h3>{movie.title}</h3>
-          <p>{movie.year}</p>
-          <div className="movie-buttons">
-            <button onClick={() => setIsEditing(true)} className="edit-btn">Bearbeiten</button>
-            {/* Der Löschen-Button ruft die deleteMovie-Funktion mit der ID des Films auf */}
-            <button onClick={() => deleteMovie(movie._id)} className="delete-btn">Löschen</button>
+        <div className="movie-card">
+          <div className="movie-poster">
+            <img src={posterImage} alt={movie.title} />
+            <div className="movie-overlay">
+              <div className="movie-actions">
+                <button onClick={() => setIsEditing(true)} className="action-btn edit-btn">
+                  <i className="icon">✏️</i>
+                </button>
+                <button onClick={() => deleteMovie(movie._id)} className="action-btn delete-btn">
+                  <i className="icon">🗑️</i>
+                </button>
+              </div>
+            </div>
           </div>
-        </>
+          <div className="movie-info">
+            <h3 className="movie-title">{movie.title}</h3>
+            <p className="movie-year">{movie.year}</p>
+          </div>
+        </div>
       )}
     </div>
   );
