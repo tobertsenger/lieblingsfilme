@@ -12,6 +12,14 @@ function App() {
   // State für das Array der Filme
   const [movies, setMovies] = useState([]);
 
+  // Anzahl der Filme, die in den letzten 24 Stunden hinzugefügt wurden
+  const newMoviesCount = movies.filter((m) => {
+    if (!m || !m.createdAt) return false;
+    const created = new Date(m.createdAt).getTime();
+    const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000; // 24 Stunden in ms
+    return created >= oneDayAgo;
+  }).length;
+
   // useEffect-Hook, um Filme beim Laden der Komponente abzurufen
   useEffect(() => {
     getMovies();
@@ -67,7 +75,7 @@ function App() {
   return (
     <div className="App">
       {/* Navigation */}
-      <nav className="main-nav">
+  <nav className="main-nav">
         <div className="container">
           <div className="nav-content">
             <div className="nav-logo">
@@ -75,15 +83,16 @@ function App() {
               <span className="logo-text">FilmBox</span>
             </div>
             <div className="nav-links">
-              <a href="#meine-filme" className="nav-link active">Meine Filme</a>
-              <a href="#hinzufuegen" className="nav-link">Film hinzufügen</a>
+      <a href="#home" className="nav-link">Home</a>
+      <a href="#meine-filme" className="nav-link active">Meine Filmsammlung</a>
+      <a href="#hinzufuegen" className="nav-link">Film hinzufügen</a>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="hero-section">
+      <section id="home" className="hero-section">
         <div className="hero-overlay">
           <div className="container">
             <div className="hero-content">
@@ -97,13 +106,13 @@ function App() {
                   <span className="stat-label">Filme</span>
                 </div>
                 <div className="stat">
-                  <span className="stat-number">∞</span>
-                  <span className="stat-label">Möglichkeiten</span>
+                  <span className="stat-number">{newMoviesCount}</span>
+                  <span className="stat-label">Neu (24h)</span>
                 </div>
               </div>
               <div className="hero-buttons">
                 <a href="#hinzufuegen" className="btn btn-primary">Film hinzufügen</a>
-                <a href="#meine-filme" className="btn btn-secondary">Meine Sammlung</a>
+                <a href="#meine-filme" className="btn btn-secondary">Zu meiner Sammlung</a>
               </div>
             </div>
           </div>
