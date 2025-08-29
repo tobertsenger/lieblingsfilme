@@ -80,7 +80,7 @@ function App() {
           <div className="nav-content">
             <div className="nav-logo">
               <span className="logo-icon">🎬</span>
-              <span className="logo-text">FilmBox</span>
+              <span className="logo-text">Lieblingsfilme-App</span>
             </div>
             <div className="nav-links">
       <a href="#home" className="nav-link">Home</a>
