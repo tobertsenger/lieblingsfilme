@@ -66,6 +66,22 @@ function App() {
 
   return (
     <div className="App">
+      {/* Navigation */}
+      <nav className="main-nav">
+        <div className="container">
+          <div className="nav-content">
+            <div className="nav-logo">
+              <span className="logo-icon">🎬</span>
+              <span className="logo-text">FilmBox</span>
+            </div>
+            <div className="nav-links">
+              <a href="#meine-filme" className="nav-link active">Meine Filme</a>
+              <a href="#hinzufuegen" className="nav-link">Film hinzufügen</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-overlay">
@@ -85,26 +101,14 @@ function App() {
                   <span className="stat-label">Möglichkeiten</span>
                 </div>
               </div>
+              <div className="hero-buttons">
+                <a href="#hinzufuegen" className="btn btn-primary">Film hinzufügen</a>
+                <a href="#meine-filme" className="btn btn-secondary">Meine Sammlung</a>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Navigation */}
-      <nav className="main-nav">
-        <div className="container">
-          <div className="nav-content">
-            <div className="nav-logo">
-              <span className="logo-icon">🎬</span>
-              <span className="logo-text">FilmBox</span>
-            </div>
-            <div className="nav-links">
-              <a href="#meine-filme" className="nav-link active">Meine Filme</a>
-              <a href="#hinzufuegen" className="nav-link">Film hinzufügen</a>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       <main className="App-main">
         {/* Add Movie Section */}
@@ -128,41 +132,7 @@ function App() {
             <MovieList movies={movies} deleteMovie={deleteMovie} updateMovie={updateMovie} />
           </div>
         </section>
-
-        {/* Featured Movies Placeholder */}
-        {movies.length === 0 && (
-          <section className="featured-section">
-            <div className="container">
-              <h2>Beginne deine Filmreise</h2>
-              <div className="featured-grid">
-                <div className="featured-item">
-                  <div className="featured-poster">
-                    <img src="https://images.unsplash.com/photo-1489599543865-a25e41e1ff08?w=300&h=450&fit=crop" 
-                         alt="Featured Movie" />
-                  </div>
-                  <h3>Klassiker entdecken</h3>
-                  <p>Füge zeitlose Filmklassiker zu deiner Sammlung hinzu</p>
-                </div>
-                <div className="featured-item">
-                  <div className="featured-poster">
-                    <img src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?w=300&h=450&fit=crop" 
-                         alt="Featured Movie" />
-                  </div>
-                  <h3>Moderne Blockbuster</h3>
-                  <p>Halte die neuesten Hits und Blockbuster fest</p>
-                </div>
-                <div className="featured-item">
-                  <div className="featured-poster">
-                    <img src="https://images.unsplash.com/photo-1489599543865-a25e41e1ff08?w=300&h=450&fit=crop" 
-                         alt="Featured Movie" />
-                  </div>
-                  <h3>Persönliche Favoriten</h3>
-                  <p>Sammle alle Filme, die dir am Herzen liegen</p>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
+        
       </main>
 
       {/* Footer */}
@@ -171,10 +141,10 @@ function App() {
           <div className="footer-content">
             <div className="footer-brand">
               <span className="logo-icon">🎬</span>
-              <span>FilmBox - Deine persönliche Filmsammlung</span>
+              <span>Lieblingsfilme - Meine persönliche Filmsammlung</span>
             </div>
             <div className="footer-links">
-              <span>Made with ❤️ for movie lovers</span>
+              <span>Copyright © 2025 Lieblingsfilme-App von Michael</span>
             </div>
           </div>
         </div>

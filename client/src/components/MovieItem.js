@@ -30,8 +30,20 @@ function MovieItem({ movie, deleteMovie, updateMovie }) {
     setIsEditing(false);
   };
 
-  // Generate a random movie poster image from Unsplash
-  const posterImage = `https://source.unsplash.com/300x450/?movie,cinema,poster&sig=${movie._id}`;
+  // Generate movie genre colors based on title hash
+  const getGenreColor = (title) => {
+    const colors = [
+      '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57',
+      '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43'
+    ];
+    let hash = 0;
+    for (let i = 0; i < title.length; i++) {
+      hash = title.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return colors[Math.abs(hash) % colors.length];
+  };
+
+  const movieColor = getGenreColor(movie.title);
 
   return (
     <div className="movie-item">
@@ -58,24 +70,25 @@ function MovieItem({ movie, deleteMovie, updateMovie }) {
           </div>
         </div>
       ) : (
-        // Anzeigemodus: Film-Details anzeigen
+        // Anzeigemodus: Film-Details anzeigen (ohne Bild)
         <div className="movie-card">
-          <div className="movie-poster">
-            <img src={posterImage} alt={movie.title} />
+          <div className="movie-poster-text" style={{ backgroundColor: movieColor }}>
+            <div className="movie-icon">🎬</div>
+            <div className="movie-year-badge">{movie.year}</div>
             <div className="movie-overlay">
               <div className="movie-actions">
-                <button onClick={() => setIsEditing(true)} className="action-btn edit-btn">
-                  <i className="icon">✏️</i>
+                <button onClick={() => setIsEditing(true)} className="action-btn edit-btn" title="Bearbeiten">
+                  ✏️
                 </button>
-                <button onClick={() => deleteMovie(movie._id)} className="action-btn delete-btn">
-                  <i className="icon">🗑️</i>
+                <button onClick={() => deleteMovie(movie._id)} className="action-btn delete-btn" title="Löschen">
+                  🗑️
                 </button>
               </div>
             </div>
           </div>
           <div className="movie-info">
             <h3 className="movie-title">{movie.title}</h3>
-            <p className="movie-year">{movie.year}</p>
+            <p className="movie-year-text">Jahr: {movie.year}</p>
           </div>
         </div>
       )}
